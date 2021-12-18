@@ -1,0 +1,43 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "install",
+      "problemMatcher": [],
+      "label": "npm: install",
+      "detail": "install dependencies from package",
+      "group": "build"
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "problemMatcher": [],
+      "label": "npm: start",
+      "detail": "microbundle-crl watch --no-compress --format modern,cjs",
+	  "dependsOn": ["npm: install"],
+    },
+    {
+      "type": "npm",
+      "script": "install",
+      "path": "example/",
+      "problemMatcher": [],
+      "label": "npm: install - example",
+      "detail": "install dependencies from package",
+      "group": "build"
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "path": "example/",
+      "problemMatcher": [],
+      "label": "npm: start - example",
+      "detail": "node ../node_modules/react-scripts/bin/react-scripts.js start",
+	  "dependsOn": ["npm: install - example"],
+    },
+	{
+		"label": "start dev",
+		"dependsOn": ["npm: start", "npm: start - example"],
+	}
+  ]
+}
