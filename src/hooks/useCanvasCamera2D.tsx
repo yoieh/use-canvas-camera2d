@@ -75,8 +75,6 @@ export const useCanvasCamera2D = (
   const mouseMove = useCallback(
     (event: MouseEvent) => {
       if (context) {
-        console.log(event)
-
         const lastMousePos = lastMousePosRef.current
         const currentMousePos = { x: event.pageX, y: event.pageY } // use document so can pan off element
         lastMousePosRef.current = currentMousePos
