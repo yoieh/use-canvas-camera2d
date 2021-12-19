@@ -1,4 +1,4 @@
-// comes from https://theleo.zone/posts/html-canvas-pan-zoom-react/
+// credit to https://gist.github.com/robinovitch61/483190546bf8f0617d2cd510f3b4b86d
 
 import {
   useCallback,
@@ -100,6 +100,22 @@ export const useCanvasCamera2D = (
       lastMousePosRef.current = { x: event.pageX, y: event.pageY }
     },
     [mouseMove, mouseUp]
+  )
+
+  const getTransformedPoint = useCallback(
+    (x, y) => {
+      if (context) {
+        const transform = context.getTransform()
+        const transformedX = x - transform.e
+        const transformedY = y - transform.f
+        return {
+          x: transformedX,
+          y: transformedY
+        }
+      }
+      return ORIGIN
+    },
+    [context]
   )
 
   // setup canvas and set context
@@ -220,7 +236,8 @@ export const useCanvasCamera2D = (
     startPan,
     reset,
     mouseMove,
-    mouseUp
+    mouseUp,
+    getTransformedPoint
   }
 }
 
